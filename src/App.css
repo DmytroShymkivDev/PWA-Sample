@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 10px;
+}
+
+@media (max-width: 1025px) {
+  .posts-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 769px) {
+  .posts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 481px) {
+  .posts-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+.post {
+  background: #eaf8f3;
+  border-radius: 10px;
+  padding: 10px;
+}

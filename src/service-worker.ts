@@ -17,7 +17,7 @@ import { StaleWhileRevalidate } from "workbox-strategies";
 declare const self: ServiceWorkerGlobalScope;
 
 const CACHE_NAME = "my-cache_name";
-const targetsToCache = ["https://jsonplaceholder.typicode.com/todos/1"];
+const targetsToCache = ["https://jsonplaceholder.typicode.com/posts"];
 
 clientsClaim();
 
@@ -90,6 +90,7 @@ self.addEventListener("install", function (event) {
   );
 });
 
+// caching response
 self.addEventListener("fetch", function (event) {
   event.respondWith(
     caches.match(event.request).then(function (response) {

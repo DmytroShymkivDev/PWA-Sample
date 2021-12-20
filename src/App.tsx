@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { IPost } from "./interfaces/Post";
+import Post from "./components/Post";
 
 function App() {
-  const [todos, setTodos] = useState();
-  const [id, setId] = useState<number>(1);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
-  const fetchTodos = (id: number) => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  const fetchPosts = () => {
+    fetch(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => response.json())
       .then((json) => {
-        setTodos(json);
-        console.log(json);
+        setPosts(json);
       });
   };
 
   useEffect(() => {
-    fetchTodos(id);
-  }, [id]);
+    fetchPosts();
+  }, []);
 
   return (
     <div>
-      <button onClick={() => setId((prev) => prev + 1)}>NEXT</button>
-      {todos ? <pre>{JSON.stringify(todos, null, 2)}</pre> : <h1>EMPTY</h1>}
+      {posts && (
+        <div className="posts-container">
+          {posts.map((post) => (
+            <Post post={post} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
